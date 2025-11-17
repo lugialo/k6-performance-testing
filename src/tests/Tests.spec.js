@@ -9,14 +9,14 @@ export const RateContentOK = new Rate('content_OK');
 
 export const options = {
   thresholds: {
-    http_req_failed: ['rate<0.30'],
-    get_contacts: ['p(99)<500'],
+    http_req_failed: ['rate<0.25'],
+    get_contacts: ['p(90)<6800'],
     content_OK: ['rate>0.95']
   },
   stages: [
-    { duration: '10s', target: 2 },
-    { duration: '10s', target: 4 },
-    { duration: '10s', target: 6 }
+    { duration: '30s', target: 7 },
+    { duration: '2m', target: 92 },
+    { duration: '1m', target: 0 }
   ]
 };
 
@@ -28,7 +28,7 @@ export function handleSummary(data) {
 }
 
 export default function () {
-  const baseUrl = 'https://test.k6.io/';
+  const baseUrl = 'https://www.dnd5eapi.co/api/2014/spells/acid-arrow';
 
   const params = {
     headers: {
